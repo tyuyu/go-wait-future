@@ -21,6 +21,11 @@ type Future struct {
 	cost   time.Duration
 }
 
+func (f *Future) Cost() time.Duration {
+	f.Wait()
+	return f.cost
+}
+
 func (f *Future) Get() (result interface{}, err error) {
 	if f.Wait() {
 		return nil, fmt.Errorf("Get Future timeout ")
